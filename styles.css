@@ -1,0 +1,346 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: url(images/backgroung.jpg);
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+#gameContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 5vh 5vw;
+}
+
+#housesGrid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3vh 10vw;
+    padding: 15vh 15vw;
+}
+
+.house {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.house.inactive {
+    filter: grayscale(100%);
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.house:active {
+    transform: scale(0.95);
+}
+
+.house-image {
+    width: 100%;
+    height: 70%;
+    /* background: #8B4513; */
+    border-radius: 10px;
+    position: relative;
+    background-image: url('images/house.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.health-bar-container {
+    width: 80%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.health-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ff4444, #ffaa00, #44ff44);
+    transition: width 0.3s;
+    border-radius: 4px;
+}
+
+.alarm-icon {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-image: url('images/alarm.png');
+    background-position: center;
+    background-size: cover;
+    display: none;
+    animation: pulse 0.5s infinite;
+    z-index: 10;
+    top: 20%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.thief {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    /* background: #333; */
+    border-radius: 10px;
+    background-image: url('images/thief.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    z-index: 5;
+    transition: transform 0.1s;
+}
+
+.thief.squashed {
+    background-image: url('images/splat.png');
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; }
+}
+
+#miniGameModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+#miniGameContent {
+    width: 85%;
+    max-width: 400px;
+    background: #9a64b5;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#timeBar {
+    width: 100%;
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#timeProgress {
+    height: 100%;
+    background: linear-gradient(90deg, #ff4444, #ffaa00);
+    transition: width 0.1s linear;
+    border-radius: 10px;
+}
+
+#sensorImage {
+    width: 150px;
+    height: 150px;
+    /* background: #f5f5f5; */
+    border-radius: 15px;
+    margin: 15px 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px solid #ddd;
+}
+
+#optionsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.option {
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 3px solid transparent;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.option:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.option:hover {
+    border-color: white;
+}
+
+.option1 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+.option2 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+.option3 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+.option4 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+#hintText {
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#startScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+}
+
+#startButton {
+    padding: 30px 60px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    animation: pulse 2s infinite;
+}
+
+#startButton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+}
+
+#startButton:active {
+    transform: scale(0.95);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#gameOverScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 20px;
+}
+
+#finalScore {
+    color: white;
+    font-size: 36px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+#resultImage {
+    width: 200px;
+    height: 200px;
+    border: 5px solid white;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    background-size: cover;
+    background-position: center;
+}
+
+#resultText {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 30px;
+    max-width: 300px;
+}
+
+#restartButton {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-image: url('images/restart.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#restartButton:active {
+    transform: scale(0.9);
+}
+
+#scoreDisplay {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    z-index: 10;
+}

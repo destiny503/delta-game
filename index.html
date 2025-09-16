@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Delta Game</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="scoreDisplay"><span id="score">0</span></div>
+        
+        <div id="housesGrid">
+            <!-- JavaScript -->
+        </div>
+    </div>
+
+    <div id="startScreen">
+        <button id="startButton">СТАРТ</button>
+    </div>
+
+    <div id="miniGameModal">
+        <div id="miniGameContent">
+            <div id="timeBar">
+                <div id="timeProgress"></div>
+            </div>
+            <div id="hintText">ЧТО ЭТО ЗА ШТУЧКА??</div>
+            <div id="sensorImage"></div>
+            <div id="optionsGrid">
+                <div class="option option1" data-option="1">СМК</div>
+                <div class="option option2" data-option="2">ИК</div>
+                <div class="option option3" data-option="3">КТС</div>
+                <div class="option option4" data-option="4">ДЫМ</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameOverScreen">
+        <div id="finalScore">Итоговый счет: <span id="finalScoreValue">0</span></div>
+        <div id="resultImage"></div>
+        <div id="resultText"></div>
+        <div id="restartButton"></div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
