@@ -36,10 +36,10 @@ const SENSOR_DATA = [
 
 const GAME_RESULTS = [
     { minScore: 0, text: "Вы — дед охранник😴", image: "images/result1.jpg" },
-    { minScore: 50, text: "Вы — ЧОП \'Равшан Секьюрити\'😎", image: "images/result2.jpg" },
-    { minScore: 150, text: "Вы — стажёр первой линии звонков😉", image: "images/result3.jpg" },
-    { minScore: 300, text: "Вы — сотрудник на чатах💻", image: "images/result4.jpg" },
-    { minScore: 500, text: "Вы — Дельтавумен, поздравляем!🎉", image: "images/result5.jpg" }
+    { minScore: 100, text: "Вы — ЧОП \'Равшан Секьюрити\'😎", image: "images/result2.jpg" },
+    { minScore: 250, text: "Вы — стажёр первой линии звонков😉", image: "images/result3.jpg" },
+    { minScore: 700, text: "Вы — сотрудник на чатах💻", image: "images/result4.jpg" },
+    { minScore: 1000, text: "Вы — Дельтавумен, поздравляем!🎉", image: "images/result5.jpg" }
 ];
 
 let score = 0;
