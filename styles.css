@@ -288,6 +288,10 @@ body {
 }
 
 #finalScore {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     color: white;
     font-size: 36px;
     margin-bottom: 30px;
